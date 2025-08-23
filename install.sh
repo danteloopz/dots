@@ -39,8 +39,16 @@ if ! check_dep gum; then
     fi
 fi
 
+if gum confirm "Install AMD drivers?"; then
+    sudo pacman -S xf86-video-amdgpu mesa lib32-mesa
+    sudo pacman -S vulkan-radeon lib32-vulkan-radeon
+fi
+
+sudo systemctl enable fstrim.timer # Enable useful service for SSDs 
+
 echo -e "   Dante's Hyprland dotfiles\n\n"
 gum confirm "Proceed with setup?" || exit 0
+
 
 # Update system
 info "Updating system..."
@@ -74,14 +82,16 @@ PACKAGES=(
     breeze nwg-look qt6ct papirus-icon-theme bibata-cursor-theme catppuccin-gtk-theme-mocha
     ttf-jetbrains-mono-nerd ttf-jetbrains-mono ttf-fira-code otf-fira-code-symbol ttf-material-design-iconic-font
     yazi wiremix
-    hyprland hyprlock hypridle hyprpolkitagent hyprsunset hyprpicker hyprshot
+    hyprland hyprlock hypridle hyprpolkitagent hyprsunset hyprpicker hyprshot ly xdg-desktop-portal-hyprland
+    hyprpolkitagent qt5-wayland qt6-wayland hyprpicker wl-gammarelay-rs
     wlogout
     power-profiles-daemon udiskie network-manager-applet brightnessctl
     cliphist stow git unzip fastfetch pamixer swaync mpv zsh swww
     base-devel
+    kdenlive audacity
     waybar eww
     rofi-wayland rofimoji
-    spotify-launcher obsidian syncthing gparted bleachbit vesktop-bin vscodium-bin neovim ventoy-bin firefox
+    spotify-launcher obsidian syncthing bleachbit vesktop-bin visual-studio-code-bin neovim ventoy-bin firefox obs-studio
     gimp libreoffice-still signal-desktop qbittorrent alacritty virtualbox virtualbox-host-modules-arch htop keepassxc
 )
 
@@ -93,18 +103,16 @@ if gum confirm "Install required packages?"; then
     fi
 fi
 
+
 # Polkit agent
 info "Setting up polkit agent..."
 systemctl --user enable --now hyprpolkitagent.service || error "Failed to enable polkit agent"
 
+# Enable ly
+sudo systemctl enable ly.service
+
 # Clone dotfiles
-info "Cloning Repository..."
-rm -rf ./hyprdots
-if ! git clone https://github.com/BinaryHarbinger/hyprdots.git; then
-    error "Failed to clone repository."
-    exit 1
-fi
-    cd hyprdots || { error "Cannot enter dotfiles directory"; exit 1; }
+cd hyprdots || { error "Cannot enter dotfiles directory"; exit 1; }
 
 # Layout update
 LAYOUT=$(localectl status | awk -F': ' '/X11 Layout/{print $2}')
@@ -116,18 +124,17 @@ else
 fi
 
 # Move scripts/configs
-info "Moving scripts and configs..."
-if [[ -d ./scripts ]]; then
-    cp -rf ./scripts ~/.config/ || error "Failed to copy scripts"
-    chmod +x ~/.config/scripts/* || true
-else
-    error "No scripts directory found."
-fi
+stow .
 
-rm -rf ./preview
-cp -rf ./config/* ~/.config/ || error "Failed to copy configs"
-chmod +x ~/.config/hypr/scripts/* ~/.config/eww/scripts/* || true
+#info "Moving scripts and configs..."
+#if [[ -d ./scripts ]]; then
+#    cp -rf ./scripts ~/.local/bin/ || error "Failed to copy scripts"
+#else
+#    error "No scripts directory found."
+#fi
+#cp -rf ./config/* ~/.config/ || error "Failed to copy configs"
 
+chmod +x ~/.local/bin/* ~/.config/hypr/scripts/* ~/.config/eww/scripts/* || true
 ln -sf "$HOME/.config/hypr/wallpapers/lines.jpg" "$HOME/.config/hypr/wallppr.png"
 
 # Change shell
@@ -138,6 +145,8 @@ if gum confirm "Change default shell to zsh?"; then
         error "Failed to change shell."
     fi
 fi
+
+sudo rmmod pcspkr # Disable loud beep tty
 
 # Restart services
 info "Reloading components..."
@@ -156,9 +165,9 @@ fi
 sleep 1
 pgrep eww >/dev/null && killall eww && eww daemon  >/dev/null 2>&1 && eww open-many stats desktopmusic  >/dev/null 2>&1
 
-# Cleanup
-info "Cleaning up..."
-cd ..
-rm -rf hyprdots
+## Cleanup
+#info "Cleaning up..."
+#cd ..
+#rm -rf hyprdots
 
 info "✅ Installation complete! Please restart your session."
