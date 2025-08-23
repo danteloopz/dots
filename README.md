@@ -1,7 +1,7 @@
 
 ----------------------------------------------------------------------------------------
 
-<h1 align="center">Hyprland Dotfiles by Dante (fork of Binary Harbinger dots)</h1>
+<h1 align="center">Hyprland Dotfiles by Dante (fork of [Binary Harbinger dots](https://github.com/BinaryHarbinger/hyprdots))</h1>
 
 ----------------------------------------------------------------------------------------
 
@@ -77,16 +77,12 @@
 
 ## How to install?
 
-I highly recommend using [Chaotic AUR](https://aur.chaotic.cx/docs)
-
 Run this command to install:
 ```
 sudo pacman -Sy --needed curl
 curl -sSL https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/refs/heads/main/install.sh -o install.sh
 chmod +x install.sh
 ./install.sh
-
-
 ```
 
 Mainteining dots
