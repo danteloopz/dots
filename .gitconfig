@@ -2,5 +2,5 @@
 	email = 96588409+danteloopz@users.noreply.github.com 
 	name = dntlp
 
-[url "ssh://git@github.com/"]
-  insteadOf = https://github.com/
+[url "ssh://git@github.com/danteloopz/"]
+  insteadOf = https://github.com/danteloopz/

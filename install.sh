@@ -11,11 +11,6 @@ RESET=$(tput sgr0)
 info() { echo -e "${GREEN}➤ $1${RESET}"; }
 error() { echo -e "${RED}✖ $1${RESET}" >&2; }
 
-echo -e "${BLUE}
-░█▀▄░▀█▀░█▀█░█▀█░█▀▄░█░█░░░█▀▄░█▀█░▀█▀░█▀▀
-░█▀▄░░█░░█░█░█▀█░█▀▄░░█░░░░█░█░█░█░░█░░▀▀█
-░▀▀░░▀▀▀░▀░▀░▀░▀░▀░▀░░▀░░░░▀▀░░▀▀▀░░▀░░▀▀▀ \n${RESET}"
-
 # Root check for necessary commands
 if [[ $EUID -eq 0 ]]; then
     error "Please do not run this script as root.\n"
@@ -112,7 +107,7 @@ systemctl --user enable --now hyprpolkitagent.service || error "Failed to enable
 sudo systemctl enable ly.service
 
 # Clone dotfiles
-cd hyprdots || { error "Cannot enter dotfiles directory"; exit 1; }
+cd dots || { error "Cannot enter dotfiles directory"; exit 1; }
 
 # Layout update
 LAYOUT=$(localectl status | awk -F': ' '/X11 Layout/{print $2}')
@@ -133,8 +128,8 @@ stow .
 #    error "No scripts directory found."
 #fi
 #cp -rf ./config/* ~/.config/ || error "Failed to copy configs"
+#chmod +x ~/.local/bin/* ~/.config/hypr/scripts/* ~/.config/eww/scripts/* || true
 
-chmod +x ~/.local/bin/* ~/.config/hypr/scripts/* ~/.config/eww/scripts/* || true
 ln -sf "$HOME/.config/hypr/wallpapers/lines.jpg" "$HOME/.config/hypr/wallppr.png"
 
 # Change shell

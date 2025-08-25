@@ -8,41 +8,27 @@ RED="\e[31m"
 BLUE="\e[34m"
 RESET="\e[0m"
 
-echo -e "\n\n${RESET}░█▀▀░█░█░█▀▀░▀█▀░█▀▀░█▄█░░░█░█░█▀█░█▀▄░█▀█░▀█▀░█▀▀
-░▀▀█░░█░░▀▀█░░█░░█▀▀░█░█░░░█░█░█▀▀░█░█░█▀█░░█░░█▀▀
-░▀▀▀░░▀░░▀▀▀░░▀░░▀▀▀░▀░▀░░░▀▀▀░▀░░░▀▀░░▀░▀░░▀░░▀▀▀${RESET}"
-
 # Prompt the user for confirmation
-gum confirm "" || exit 1
+gum confirm "Do you wish to update your system?" || exit 1
 
-# Update pacman packages via yay
-echo -e "${BLUE}\n░█▀▀░█░█░█▀▀░▀█▀░█▀▀░█▄█░░░█▀█░█▀█░█▀▀░█░█░█▀█░█▀▀░█▀▀░█▀▀
-░▀▀█░░█░░▀▀█░░█░░█▀▀░█░█░░░█▀▀░█▀█░█░░░█▀▄░█▀█░█░█░█▀▀░▀▀█
-░▀▀▀░░▀░░▀▀▀░░▀░░▀▀▀░▀░▀░░░▀░░░▀░▀░▀▀▀░▀░▀░▀░▀░▀▀▀░▀▀▀░▀▀▀\n${RESET}"
-if yay -Syu --noconfirm; then
-	echo
-    echo -e "${BLUE}░█▀▀░█░░░█▀█░▀█▀░█▀█░█▀█░█░█░░░█▀█░█▀█░█▀▀░█░█░█▀▀
-░█▀▀░█░░░█▀█░░█░░█▀▀░█▀█░█▀▄░░░█▀▀░█▀█░█░░░█▀▄░▀▀█
-░▀░░░▀▀▀░▀░▀░░▀░░▀░░░▀░▀░▀░▀░░░▀░░░▀░▀░▀▀▀░▀░▀░▀▀▀${RESET}"
+if [[ $OSTYPE == 'darwin'* ]]; then
+	if brew update && brew upgrade; then
+		echo "Brew updated successfully"
+	else 
+	    echo -e "${RED}Failed to update Brew packages.${RESET}"
+	    exit 1
+	fi
+	echo "Starting system update"
+	sudo softwareupdate --install --all
 else
-	echo
-    echo -e "${RED}Failed to update pacman and AUR packages.${RESET}"
-    exit 1
+	# Update pacman packages via yay
+	if yay -Syu --noconfirm; then
+		echo "AUR packages updated successfully"
+	else
+	    echo -e "${RED}Failed to update pacman and AUR packages.${RESET}"
+	    exit 1
+	fi
 fi
-
-# Update Flatpak packages
-echo
-if flatpak update -y; then
-    echo -e ""
-else
-    echo -e "${RED}Failed to update Flatpak packages.${RESET}"
-    echo -e "\n Press any key to close"
-    exit 1
-fi
-echo
-echo -e "${GREEN}░█▀▀░█▀█░█▄█░█▀█░█░░░█▀▀░▀█▀░█▀▀░█▀▄
-░█░░░█░█░█░█░█▀▀░█░░░█▀▀░░█░░█▀▀░█░█
-░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀░░▀░░▀▀▀░▀▀░${RESET}"
 
 echo -e "\nPress enter key to close"
 

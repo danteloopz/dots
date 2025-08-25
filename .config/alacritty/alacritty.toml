@@ -33,8 +33,8 @@ multiplier = 3
 [selection]
 save_to_clipboard = false
 
-[terminal.shell]
-program = "/usr/bin/zsh"
+#[terminal.shell] # commented out otherwise it crashes on mac
+#program = "/usr/bin/zsh"
 
 [window]
 opacity = 0.95

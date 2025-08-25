@@ -8,12 +8,12 @@ setopt interactive_comments
 # History in cache directory:
 HISTSIZE=10000000
 SAVEHIST=10000000
-HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/history"
+HISTFILE="~/.cache/zsh/history"
 
 # Load aliases and shortcuts if existent.
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc"
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc"
+[ -f ~/.config/shell/shortcutrc ] && source ~/.config/shell/shortcutrc
+[ -f ~/.config/shell/aliasrc ] && source ~/.config/shell/aliasrc
+[ -f ~/.config/shell/zshnameddirrc ] && source ~/.config/shell/zshnameddirrc
 
 # Basic auto/tab complete:
 autoload -U compinit
