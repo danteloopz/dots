@@ -1,0 +1,14 @@
+# Comments and blank lines are allowed.
+
+\.git
+\.gitignore
+\.gitmodules
+\.DS_Store
+
+^/README.*
+^/LICENSE.*
+^/COPYING
+install.sh
+preview
+^/known_hosts
+^/known_hosts.old
