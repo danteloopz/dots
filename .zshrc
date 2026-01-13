@@ -16,7 +16,7 @@ r() {
 }
 
 d() {
-	g++ -std=c++20 -fmax-errors=2 -Wshadow -Wextra -Wall -g $1 -o solv && gdb solv -ex "start < inp" -ex "tui enable"
+    g++ -std=c++20 -fmax-errors=2 -Wshadow -Wextra -Wall -g $1 -o solv && gdb solv -ex "start < inp" -ex "tui enable"
 }
 
 # Verbosity and settings that you pretty much just always are going to want.

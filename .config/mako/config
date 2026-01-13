@@ -1,0 +1,58 @@
+# =========================
+# Mako Notification Config
+# =========================
+
+# -------- Fonts --------
+font=monospace 10
+format=<b>%s</b>\n%b
+
+# -------- Core Colors --------
+background-color=#333333
+text-color=#c2c2c2
+border-color=#5e5e5e
+progress-color=over #686868
+
+# -------- Layout --------
+width=360
+height=110
+margin=10
+padding=10
+border-size=2
+border-radius=6
+
+# -------- Position --------
+anchor=top-right
+layer=overlay
+
+# -------- Behavior --------
+default-timeout=5000
+ignore-timeout=false
+max-visible=5
+
+# -------- Icons --------
+icons=1
+icon-location=left
+max-icon-size=48
+
+# -------- Urgency Levels --------
+
+[urgency=low]
+background-color=#2a2a2a
+text-color=#7c7c7c
+border-color=#5e5e5e
+default-timeout=3000
+
+[urgency=normal]
+background-color=#333333
+text-color=#c2c2c2
+border-color=#686868
+default-timeout=5000
+
+[urgency=critical]
+background-color=#5e5e5e
+text-color=#ffffff
+border-color=#b8b8b8
+default-timeout=0
+
+# -------- Grouping --------
+group-by=app-name
