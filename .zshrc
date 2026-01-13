@@ -82,4 +82,4 @@ bindkey -M visual '^[[P' vi-delete
 
 # Load syntax highlighting; should be last.
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
-eval "$(ssh-agent -s)" 1>/dev/null # Start ssh-agent
+# eval "$(ssh-agent -s)" 1>/dev/null # Start ssh-agent
