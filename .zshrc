@@ -11,12 +11,13 @@ SAVEHIST=10000000
 HISTFILE="~/.cache/zsh/history"
 
 # Load aliases
+
 r() {
-    g++ -std=c++20 -fmax-errors=2 -Wshadow -Wextra -Wall -g $1 -o solv && cat inp | ./solv
+	g++ -std=c++20 -Wall -Wextra -Wshadow -g -o solv $1 && cat inp | ./solv
 }
 
 d() {
-    g++ -std=c++20 -fmax-errors=2 -Wshadow -Wextra -Wall -g $1 -o solv && gdb solv -ex "start < inp" -ex "tui enable"
+	g++ -std=c++20 -Wall -Wextra -Wshadow -g -o solv $1 && gdb solv -ex "tui enable" -ex "start < inp"
 }
 
 # Verbosity and settings that you pretty much just always are going to want.
@@ -27,7 +28,7 @@ alias \
 	rsync="rsync -vrPlu" \
 	mkd="mkdir -pv" \
 	ffmpeg="ffmpeg -hide_banner" \
-	v='nvim'
+	v="nvim"
 
 # Colorize commands when possible.
 alias \
