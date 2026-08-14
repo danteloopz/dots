@@ -1,36 +1,33 @@
-[theme]
-background = "#333333"
-foreground = "#C2C2C2"
-border = "#5E5E5E"
-highlight = "#5E5E5E"
-accent = "#B8B8B8"
-background-accent = "#333333"
+[manager]
+# Core UI panel colors
+cwd = { fg = "#B8B8B8" }
+
+# Hovered item styling
+hovered = { fg = "#333333", bg = "#5E5E5E" }
+
+# Selected items styling
+preview = { fg = "#C2C2C2", bg = "#333333", border = "#5E5E5E" }
 
 [palette]
-# ANSI colors
-# The following colors are based on the provided palette.
-# They are mapped to ANSI 0-15.
-# `0` to `7` are the basic colors, and `8` to `15` are the bright colors.
-0 = "#333333" # black
-1 = "#CCCCCC" # red
-2 = "#686868" # green
-3 = "#7C7C7C" # yellow
-4 = "#868686" # blue
-5 = "#5E5E5E" # magenta
-6 = "#B8B8B8" # cyan
-7 = "#A4A4A4" # white
-8 = "#A4A4A4" # bright black (gray)
-9 = "#CCCCCC" # bright red
-10 = "#686868" # bright green
-11 = "#7C7C7C" # bright yellow
-12 = "#868686" # bright blue
-13 = "#5E5E5E" # bright magenta
-14 = "#B8B8B8" # bright cyan
-15 = "#868686" # bright white
+0 = "#333333" 
+1 = "#CCCCCC" 
+2 = "#686868" 
+3 = "#7C7C7C" 
+4 = "#868686" 
+5 = "#5E5E5E" 
+6 = "#B8B8B8" 
+7 = "#A4A4A4" 
+8 = "#A4A4A4" 
+9 = "#CCCCCC" 
+10 = "#686868" 
+11 = "#7C7C7C" 
+12 = "#868686" 
+13 = "#5E5E5E" 
+14 = "#B8B8B8" 
+15 = "#868686" 
 
 [icon]
-# Icon colors
-# These are mapped to the provided palette to keep them grayscale.
+# Core types
 dir = "#A4A4A4"
 file = "#C2C2C2"
 symlink = "#B8B8B8"
@@ -42,30 +39,100 @@ fifo = "#CCCCCC"
 socket = "#686868"
 broken = "#CCCCCC"
 
-# Popular file extensions
-# Mapping common file types to the grayscale palette
-video = "#686868"      # .mp4, .mkv, .webm, etc.
-audio = "#5E5E5E"      # .mp3, .flac, .wav, etc.
-image = "#A4A4A4"      # .jpg, .png, .gif, .svg, etc.
-archive = "#7C7C7C"    # .zip, .tar, .gz, .rar, etc. <-- This is the correct line.
-document = "#B8B8B8"   # .pdf, .doc, .docx, .odt, etc.
-text = "#C2C2C2"       # .txt, .md, .log, etc.
-code = "#868686"       # .rs, .c, .cpp, .js, .py, .go, etc.
-web = "#B8B8B8"        # .html, .css, .scss, etc.
-script = "#7C7C7C"     # .sh, .zsh, .bash, etc.
-config = "#5E5E5E"     # .conf, .json, .toml, .yaml, etc.
-font = "#A4A4A4"       # .ttf, .otf, .woff, etc.
-database = "#686868"   # .sql, .db, .sqlite, etc.
-data = "#C2C2C2"       # .json, .csv, .xml, etc.
-presentation = "#868686" # .ppt, .pptx, etc.
-spreadsheet = "#686868" # .xls, .xlsx, .csv, etc.
-disk = "#B8B8B8"       # .iso, .img, .dmg, etc.
-vm = "#5E5E5E"         # .vdi, .vmdk, etc.
-key = "#A4A4A4"        # .pem, .key, .pub, etc.
-lock = "#868686"       # .lock, .lk, etc.
-makefile = "#B8B8B8"   # Makefile, makefile
-docker = "#686868"     # Dockerfile
-git = "#7C7C7C"        # .gitignore, .gitmodules
-bin = "#7C7C7C"        # .bin
-desktop = "#A4A4A4"    # .desktop
-service = "#686868"    # .service
+# Rules for categories and extensions
+rules = [
+  # Categories
+  { name = "*", is = "dir", fg = "#A4A4A4" },
+  { name = "*", is = "exec", fg = "#7C7C7C" },
+  
+  # File Extension Mappings
+  { name = "*.mp4", fg = "#686868" },
+  { name = "*.mkv", fg = "#686868" },
+  { name = "*.webm", fg = "#686868" },
+  
+  { name = "*.mp3", fg = "#5E5E5E" },
+  { name = "*.flac", fg = "#5E5E5E" },
+  { name = "*.wav", fg = "#5E5E5E" },
+  
+  { name = "*.jpg", fg = "#A4A4A4" },
+  { name = "*.png", fg = "#A4A4A4" },
+  { name = "*.gif", fg = "#A4A4A4" },
+  { name = "*.svg", fg = "#A4A4A4" },
+  
+  { name = "*.zip", fg = "#7C7C7C" },
+  { name = "*.tar", fg = "#7C7C7C" },
+  { name = "*.gz", fg = "#7C7C7C" },
+  { name = "*.rar", fg = "#7C7C7C" },
+  
+  { name = "*.pdf", fg = "#B8B8B8" },
+  { name = "*.doc", fg = "#B8B8B8" },
+  { name = "*.docx", fg = "#B8B8B8" },
+  { name = "*.odt", fg = "#B8B8B8" },
+  
+  { name = "*.txt", fg = "#C2C2C2" },
+  { name = "*.md", fg = "#C2C2C2" },
+  { name = "*.log", fg = "#C2C2C2" },
+  
+  { name = "*.rs", fg = "#868686" },
+  { name = "*.c", fg = "#868686" },
+  { name = "*.cpp", fg = "#868686" },
+  { name = "*.js", fg = "#868686" },
+  { name = "*.py", fg = "#868686" },
+  { name = "*.go", fg = "#868686" },
+  
+  { name = "*.html", fg = "#B8B8B8" },
+  { name = "*.css", fg = "#B8B8B8" },
+  { name = "*.scss", fg = "#B8B8B8" },
+  
+  { name = "*.sh", fg = "#7C7C7C" },
+  { name = "*.zsh", fg = "#7C7C7C" },
+  { name = "*.bash", fg = "#7C7C7C" },
+  
+  { name = "*.conf", fg = "#5E5E5E" },
+  { name = "*.json", fg = "#5E5E5E" },
+  { name = "*.toml", fg = "#5E5E5E" },
+  { name = "*.yaml", fg = "#5E5E5E" },
+  
+  { name = "*.ttf", fg = "#A4A4A4" },
+  { name = "*.otf", fg = "#A4A4A4" },
+  { name = "*.woff", fg = "#A4A4A4" },
+  
+  { name = "*.sql", fg = "#686868" },
+  { name = "*.db", fg = "#686868" },
+  { name = "*.sqlite", fg = "#686868" },
+  
+  { name = "*.csv", fg = "#C2C2C2" },
+  { name = "*.xml", fg = "#C2C2C2" },
+  
+  { name = "*.ppt", fg = "#868686" },
+  { name = "*.pptx", fg = "#868686" },
+  
+  { name = "*.xls", fg = "#686868" },
+  { name = "*.xlsx", fg = "#686868" },
+  
+  { name = "*.iso", fg = "#B8B8B8" },
+  { name = "*.img", fg = "#B8B8B8" },
+  { name = "*.dmg", fg = "#B8B8B8" },
+  
+  { name = "*.vdi", fg = "#5E5E5E" },
+  { name = "*.vmdk", fg = "#5E5E5E" },
+  
+  { name = "*.pem", fg = "#A4A4A4" },
+  { name = "*.key", fg = "#A4A4A4" },
+  { name = "*.pub", fg = "#A4A4A4" },
+  
+  { name = "*.lock", fg = "#868686" },
+  { name = "*.lk", fg = "#868686" },
+  
+  { name = "Makefile", fg = "#B8B8B8" },
+  { name = "makefile", fg = "#B8B8B8" },
+  { name = "Dockerfile", fg = "#686868" },
+  
+  { name = ".gitignore", fg = "#7C7C7C" },
+  { name = ".gitmodules", fg = "#7C7C7C" },
+  
+  { name = "*.bin", fg = "#7C7C7C" },
+  { name = "*.desktop", fg = "#A4A4A4" },
+  { name = "*.service", fg = "#686868" }
+]
+

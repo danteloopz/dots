@@ -7,7 +7,7 @@
     "height": 0,
 
     "modules-center": ["hyprland/workspaces"],
-    "modules-right": ["tray", "pulseaudio", "clock"],
+    "modules-right": ["tray", "pulseaudio", "network", "bluetooth", "clock"],
     
     "hyprland/language": {
         "format": "{}",
@@ -30,6 +30,7 @@
       "format-muted": " ",
       "default": [" ", " "]
     },
+    "on-click": "pavucontrol"
 },
 
 // ====================================================
@@ -73,6 +74,32 @@
     "format": " {:%R}",
     "tooltip-format": " {:%d %B %Y}",
 },
+
+
+"network": {
+    "format-wifi": "  {essid} ({signalStrength}%)",
+    "format-ethernet": "{ipaddr}",
+    "format-disconnected": "Disconnected",
+    "tooltip-format": "{ifname} via {gwaddr}",
+    "on-click": "foot --app-id=waybar-floating -e nmtui" 
+},
+
+"bluetooth": {
+    "format": " {status}",
+    "format-connected": " {device_alias}",
+    "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+    
+    // Hide the module entirely when no hardware controller is found
+    "format-no-controller": "", 
+    
+    // Hide the module entirely when bluetooth is toggled off/disabled
+    "format-disabled": "", 
+    
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "on-click": "blueman-manager"
+}
+
+
 
 // =======================================================
 }
